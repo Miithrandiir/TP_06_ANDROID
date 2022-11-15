@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TodoHEBAN</string>
+    <string name="app_addItem_title">Tâche à ajouter</string>
+    <string name="app_addItem_label">Libellé de la tâche</string>
+    <string name="app_cancel">annuler</string>
+    <string name="app_valid">Valider</string>
+</resources>
