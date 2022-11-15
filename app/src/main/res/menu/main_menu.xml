@@ -4,4 +4,7 @@
     <item
         android:id="@+id/menu_item_delete_checked"
         android:title="@string/app_main_menu_delete" />
+    <item
+        android:id="@+id/menu_item_save_data"
+        android:title="@string/app_main_menu_save_items" />
 </menu>

@@ -5,4 +5,6 @@
     <string name="app_cancel">annuler</string>
     <string name="app_valid">Valider</string>
     <string name="app_main_menu_delete">Supprimer toutes les tâches sélectionnées</string>
+    <string name="app_error_when_save">Une erreur est survenue</string>
+    <string name="app_main_menu_save_items">Sauvegarder les items</string>
 </resources>
