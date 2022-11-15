@@ -4,4 +4,5 @@
     <string name="app_addItem_label">Libellé de la tâche</string>
     <string name="app_cancel">annuler</string>
     <string name="app_valid">Valider</string>
+    <string name="app_main_menu_delete">Supprimer toutes les tâches sélectionnées</string>
 </resources>
