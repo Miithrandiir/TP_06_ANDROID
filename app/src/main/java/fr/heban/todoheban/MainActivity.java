@@ -93,10 +93,11 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-
+        //Si le bouton de suppression est sélectionner
         if (id == R.id.menu_item_delete_checked) {
             this.deleteCheckedItem();
         } else if (id == R.id.menu_item_save_data) {
+            //bouton pour sauvegarder
             this.saveItems();
         }
         return true;
@@ -107,6 +108,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void onButtonAddItemClicked(View view) {
+        //On démarre une nouvelle activité
         Intent intent = new Intent(this, AdditemActivity.class);
         strGetResult.launch(intent);
     }
@@ -115,9 +117,11 @@ public class MainActivity extends AppCompatActivity {
      * Méthode permettant de créer/mettre à jour l'adaptateur. Et ansi mettre à jour les données.
      */
     private void buildAdapter() {
+        //On récupère a liste view
         ListView lv = (ListView) findViewById(R.id.listview);
-
+        //On recréer une nouvelle instance d'un array adapter
         this.adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_checked, this.entries);
+        //On ajoute l'array adapter dans le list view
         lv.setAdapter(this.adapter);
     }
 
@@ -126,22 +130,25 @@ public class MainActivity extends AppCompatActivity {
      */
     private void deleteCheckedItem() {
         ListView lv = (ListView) findViewById(R.id.listview);
-
+        //Le SparseBooleanArray permet de renvoyer un array avec les items qui sont sélectionnés
         SparseBooleanArray sparseBooleanArray = lv.getCheckedItemPositions();
         ArrayList<String> checkedValues = new ArrayList<>();
 
+        //On itère dans le sparseArray
         for (int i = 0; i < sparseBooleanArray.size(); ++i) {
+            //Si il est sélectionner on l'ajoute dans le tableau des éléments à supprimer
+            //Aucun problème lors de la suppression car tout fonctionne avec des références !
             if (sparseBooleanArray.valueAt(i) && this.adapter != null) {
                 checkedValues.add(entries.get(sparseBooleanArray.keyAt(i)));
             }
         }
-
+        //On supprime les éléments sélectionnés
         for(int i=0;i<checkedValues.size();++i) {
             this.entries.remove(checkedValues.get(i));
         }
-
+        //On met à jour les items de la liste
         this.buildAdapter();
-
+        //On remet à zéro la sélection
         lv.clearChoices();
     }
 
@@ -180,24 +187,31 @@ public class MainActivity extends AppCompatActivity {
             BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
             String receiveString = "";
             StringBuilder stringBuilder = new StringBuilder();
+            // Tout le temps que l'on peut lire une ligne on la lit
             while ((receiveString = bufferedReader.readLine()) != null) {
+                //Si notre string builder est vide on ajoute la ligne
                 if(stringBuilder.toString().equals("")) {
                     stringBuilder.append(receiveString);
                 } else {
+                    //s'il n'est pas vide, on ajoute d'abord un saut de ligne puis notre ligne
+                    //permettra de faire un split plus tard
                     stringBuilder.append('\n').append(receiveString);
                 }
             }
-
+            //on ferme de flux
             inputStreamReader.close();
+            //Convertit notre stringBuilder en string
             String content = stringBuilder.toString();
-
+            //On le split à chaque saut de ligne
             String[] splittedData = content.split("\n");
             ArrayList<String> data = new ArrayList<String>();
 
+            //On ajoute dans le tableau
             for (String item : splittedData) {
                 data.add(item);
             }
 
+            //On met à jour les données
             this.entries = data;
 
             this.buildAdapter();
